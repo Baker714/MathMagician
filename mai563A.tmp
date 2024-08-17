@@ -1,0 +1,189 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmf4icpv7svra"]
+
+[ext_resource type="Theme" uid="uid://cx4el83745k4k" path="res://new_theme.tres" id="1_5icae"]
+[ext_resource type="Script" path="res://main.gd" id="1_jwp3i"]
+[ext_resource type="Texture2D" uid="uid://cwlx1espmsik8" path="res://assets/adder.png" id="2_fvcs5"]
+[ext_resource type="Texture2D" uid="uid://hfsqkyym8xnc" path="res://assets/subtracter.png" id="3_kkdqf"]
+[ext_resource type="Texture2D" uid="uid://cigusfmnj368c" path="res://assets/multiplier.png" id="4_ngokx"]
+[ext_resource type="Texture2D" uid="uid://cu7tvaqugfe3s" path="res://assets/dvider.png" id="5_gkjmd"]
+[ext_resource type="Texture2D" uid="uid://dsmfog8npy8ii" path="res://assets/weight.png" id="6_etlrt"]
+[ext_resource type="Texture2D" uid="uid://cjp8lq3v41br7" path="res://assets/scale.png" id="7_wcvwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxdlc"]
+bg_color = Color(1, 1, 1, 0)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("currentWeight", "weightGoal", "addButton", "subtractButton", "multiplyButton", "divideButton", "weightBlock")]
+script = ExtResource("1_jwp3i")
+currentWeight = NodePath("Node2D/Scale/PanelContainer/CurrentWeightLabel")
+weightGoal = NodePath("CanvasLayer/WeightGoal/CenterContainer/HBoxContainer/WeightGoalNumberLabel")
+addButton = NodePath("CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AddButton")
+subtractButton = NodePath("CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SubtractButton")
+multiplyButton = NodePath("CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/MultiplyButton")
+divideButton = NodePath("CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/DivideButton")
+weightBlock = NodePath("Node2D/Weight/WeightSprite")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = -320.0
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 176.0
+theme = ExtResource("1_5icae")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_5icae")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_5icae")
+text = "1"
+icon = ExtResource("2_fvcs5")
+
+[node name="SubtractButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_5icae")
+text = "1"
+icon = ExtResource("3_kkdqf")
+
+[node name="MultiplyButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_5icae")
+text = "2"
+icon = ExtResource("4_ngokx")
+
+[node name="DivideButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_5icae")
+text = "2"
+icon = ExtResource("5_gkjmd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Submit"
+
+[node name="ClearButton" type="Button" parent="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Clear"
+
+[node name="WeightGoal" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 256.0
+offset_top = -184.0
+offset_right = 320.0
+offset_bottom = -120.0
+theme = ExtResource("1_5icae")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/WeightGoal"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WeightGoal/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="WeightGoalNumberLabel" type="Label" parent="CanvasLayer/WeightGoal/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Label2" type="Label" parent="CanvasLayer/WeightGoal/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "lbs"
+
+[node name="Timer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = -320.0
+offset_top = -184.0
+offset_right = -192.0
+offset_bottom = -130.0
+theme = ExtResource("1_5icae")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Timer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Timer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Timer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Timer"
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Timer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/Timer/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "1:00"
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Weight" type="Node2D" parent="Node2D"]
+
+[node name="WeightSprite" type="Sprite2D" parent="Node2D/Weight"]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("6_etlrt")
+offset = Vector2(0, -8)
+
+[node name="Scale" type="Node2D" parent="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Scale"]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("7_wcvwm")
+
+[node name="PanelContainer" type="PanelContainer" parent="Node2D/Scale"]
+offset_left = -40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = -9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hxdlc")
+
+[node name="CurrentWeightLabel" type="Label" parent="Node2D/Scale/PanelContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SubtractButton" to="." method="_on_subtract_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/MultiplyButton" to="." method="_on_multiply_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/DivideButton" to="." method="_on_divide_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]
