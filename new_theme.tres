@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cx4el83745k4k"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cx4el83745k4k"]
+
+[ext_resource type="FontFile" uid="uid://dp8cjrmw6oc7w" path="res://assets/Crang.ttf" id="2_7r4bj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp6s6"]
 content_margin_left = 10.0
@@ -50,6 +52,8 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icaw4"]
 bg_color = Color(1, 0.180165, 0.75976, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xfpsn"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gygvb"]
 bg_color = Color(0.575386, 0.0383453, 0.566643, 1)
 border_width_left = 2
@@ -62,7 +66,7 @@ border_color = Color(0, 0, 0, 1)
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 4
-Button/fonts/font = null
+Button/fonts/font = ExtResource("2_7r4bj")
 Button/styles/disabled = null
 Button/styles/focus = SubResource("StyleBoxFlat_xp6s6")
 Button/styles/hover = SubResource("StyleBoxFlat_hqriy")
@@ -71,6 +75,17 @@ Button/styles/pressed = SubResource("StyleBoxFlat_dt1vu")
 HBoxContainer/colors/color = Color(0.955859, 0.000134574, 0.77837, 1)
 HBoxContainer/constants/separation = 40
 HBoxContainer/styles/color = SubResource("StyleBoxFlat_icaw4")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("2_7r4bj")
+Label/styles/normal = SubResource("StyleBoxEmpty_xfpsn")
 MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0

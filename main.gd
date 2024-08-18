@@ -28,6 +28,8 @@ static var maxWeightGoal = 30
 static var minWeightGoal = 10
 static var timerLength = 10
 
+var worryTime = false
+
 func _ready():
 	level += 1
 	currentLevel.text = 'Lvl ' + str(level)
@@ -38,7 +40,6 @@ func _ready():
 		maxWeightGoal *= 4
 		minWeightGoal *= 4
 		timerLength += 10
-		
 	
 	if level > 3:
 		multiplyButton.visible = true
@@ -48,19 +49,25 @@ func _ready():
 		squareButton.visible = true
 	
 	weightGoal.text = str(rng.randi_range(minWeightGoal, maxWeightGoal))
-	currentWeight.text = str(rng.randi_range(minWeightGoal, maxWeightGoal))
+	currentWeight.text = str(rng.randi_range(1, 9))
 	changeSize()
 	moneyMade.text = '$' + str(money)
 	$Timer.wait_time = timerLength
 	$Timer.start()
 	
 func _process(delta):
-	timer.text = str(int($Timer.time_left))
+	timer.text = str(int($Timer.time_left) + 1)
 	
 	if Input.is_key_pressed(KEY_ESCAPE):
 		pauseMenu.visible = !pauseMenu.visible
 		$Timer.paused = !$Timer.paused
 		get_tree().paused = !get_tree().paused
+		
+	if int($Timer.time_left) == timerLength / 3 and !worryTime:
+		worryTime = true
+		$MainTheme.stop()
+		$WorryTheme.play()
+		
 
 func _on_add_button_pressed():
 	currentWeight.text = str(int(currentWeight.text) + int(addButton.text))
@@ -87,6 +94,9 @@ func _on_submit_button_pressed():
 		successBanner.visible = true
 		money += int($Timer.time_left)
 		get_tree().paused = true
+		$CompleteTheme.play()
+	else:
+		$WrongAnswerTheme.play()
 
 func _on_clear_button_pressed():
 	currentWeight.text = '0'
@@ -106,11 +116,13 @@ func _on_next_level_button_pressed():
 
 
 func _on_timer_timeout():
+	timer.text = '0'
 	$Timer.stop()
 	failureBanner.visible = true
 	get_tree().paused = true
+	$FailTheme.play()
 	if money != 0:
-		money -= int($Timer.time_left)
+		money -= 10
 
 func _on_continue_button_pressed():
 	pauseMenu.visible = !pauseMenu.visible
@@ -122,7 +134,6 @@ func _on_main_menu_button_pressed():
 
 func _on_quit_game_button_pressed():
 	get_tree().quit()
-
 
 func _on_square_button_pressed():
 	currentWeight.text = str(int(currentWeight.text) * int(currentWeight.text))

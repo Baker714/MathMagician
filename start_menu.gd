@@ -9,7 +9,7 @@ func _process(delta):
 	pass
 
 func _on_how_to_play_button_pressed():
-	get_tree().change_scene_to_file("res://how_to_play.tscn")
+	$CanvasLayer/HowToPlay.visible = true
 
 func _on_time_trial_button_pressed():
 	get_tree().change_scene_to_file("res://time_trial.tscn")
@@ -19,3 +19,7 @@ func _on_casual_mode_button_pressed():
 
 func _on_quit_game_pressed():
 	get_tree().quit()
+
+
+func _on_main_menu_button_pressed():
+	$CanvasLayer/HowToPlay.visible = false

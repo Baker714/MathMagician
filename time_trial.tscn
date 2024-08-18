@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmf4icpv7svra"]
+[gd_scene load_steps=17 format=3 uid="uid://dmf4icpv7svra"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8rhij"]
 [ext_resource type="Theme" uid="uid://cx4el83745k4k" path="res://new_theme.tres" id="2_jnnoe"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://ctv0xo8dkh4ak" path="res://assets/square.png" id="7_h3iht"]
 [ext_resource type="Texture2D" uid="uid://cjp8lq3v41br7" path="res://assets/scale.png" id="8_24jh2"]
 [ext_resource type="Texture2D" uid="uid://c6wf1tgq3cx4d" path="res://assets/background.png" id="10_2imxd"]
+[ext_resource type="AudioStream" uid="uid://big1fh7o2rfop" path="res://assets/music/mathmagician_game_theme.wav" id="11_trerx"]
+[ext_resource type="AudioStream" uid="uid://kd1m7gu1nejl" path="res://assets/music/mathmagician_complete_theme.wav" id="12_so60k"]
+[ext_resource type="AudioStream" uid="uid://dim2pl6phna1e" path="res://assets/music/mathmagician_fail_theme.wav" id="13_h7ae5"]
+[ext_resource type="AudioStream" uid="uid://dp75ry527nebe" path="res://assets/music/mathmagician_stress_theme.wav" id="14_igt2c"]
+[ext_resource type="AudioStream" uid="uid://ca2eekepuqpm5" path="res://assets/music/wrong_answer_sound.wav" id="15_pc2ya"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxdlc"]
 bg_color = Color(1, 1, 1, 0)
@@ -17,10 +22,10 @@ bg_color = Color(1, 1, 1, 0)
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("currentWeight", "weightGoal", "timer", "moneyMade", "currentLevel", "successBanner", "failureBanner", "pauseMenu", "addButton", "subtractButton", "multiplyButton", "divideButton", "squareButton", "weightBlock")]
 script = ExtResource("1_8rhij")
 currentWeight = NodePath("Node2D/Scale/PanelContainer/CurrentWeightLabel")
-weightGoal = NodePath("UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer/WeightGoalNumberLabel")
-timer = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer/TimerLabel")
-moneyMade = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2/MoneyMadeLabel")
-currentLevel = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2/LevelLabel")
+weightGoal = NodePath("UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/WeightGoalNumberLabel")
+timer = NodePath("UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer/TimerLabel")
+moneyMade = NodePath("UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer2/MoneyMadeLabel")
+currentLevel = NodePath("UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer2/LevelLabel")
 successBanner = NodePath("UICanvasLayer/SuccessBanner")
 failureBanner = NodePath("UICanvasLayer/FailBanner")
 pauseMenu = NodePath("UICanvasLayer/PauseMenu")
@@ -32,7 +37,8 @@ squareButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/
 weightBlock = NodePath("Node2D/Weight/WeightSprite")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -4.00001)
+scale = Vector2(1, 1)
 texture = ExtResource("10_2imxd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -118,9 +124,9 @@ focus_mode = 0
 text = "Clear"
 
 [node name="WeightGoal" type="PanelContainer" parent="UICanvasLayer"]
-offset_left = 192.0
+offset_left = 168.0
 offset_top = -184.0
-offset_right = 322.0
+offset_right = 320.0
 offset_bottom = -128.0
 theme = ExtResource("2_jnnoe")
 
@@ -134,28 +140,29 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "Weight Goal"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_right = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="WeightGoalNumberLabel" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="WeightGoalNumberLabel" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "10"
 
-[node name="Label2" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "lbs"
 
 [node name="Timer" type="PanelContainer" parent="UICanvasLayer"]
@@ -170,41 +177,49 @@ layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_right = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/Timer/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/Timer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="LevelLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="LevelLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "Lvl 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoneyMadeLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="MoneyMadeLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "$00"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_jnnoe")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "Timer"
 
-[node name="TimerLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TimerLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
 text = "1:00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -247,7 +262,7 @@ autowrap_mode = 2
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 10
-text = "Next Box"
+text = "Next Level"
 
 [node name="SuccessBanner" type="PanelContainer" parent="UICanvasLayer"]
 process_mode = 3
@@ -359,8 +374,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hxdlc")
 [node name="CurrentWeightLabel" type="Label" parent="Node2D/Scale/PanelContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
+theme = ExtResource("2_jnnoe")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 25
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -368,6 +384,24 @@ autowrap_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
+
+[node name="MainTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_trerx")
+autoplay = true
+
+[node name="CompleteTheme" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("12_so60k")
+
+[node name="FailTheme" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("13_h7ae5")
+
+[node name="WorryTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_igt2c")
+
+[node name="WrongAnswerTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_pc2ya")
 
 [connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
 [connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SubtractButton" to="." method="_on_subtract_button_pressed"]
