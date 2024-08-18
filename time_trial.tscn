@@ -1,0 +1,384 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmf4icpv7svra"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_8rhij"]
+[ext_resource type="Theme" uid="uid://cx4el83745k4k" path="res://new_theme.tres" id="2_jnnoe"]
+[ext_resource type="Texture2D" uid="uid://cwlx1espmsik8" path="res://assets/adder.png" id="3_wggun"]
+[ext_resource type="Texture2D" uid="uid://hfsqkyym8xnc" path="res://assets/subtracter.png" id="4_jjrro"]
+[ext_resource type="Texture2D" uid="uid://cigusfmnj368c" path="res://assets/multiplier.png" id="5_xcu5k"]
+[ext_resource type="Texture2D" uid="uid://cu7tvaqugfe3s" path="res://assets/dvider.png" id="6_qjdau"]
+[ext_resource type="Texture2D" uid="uid://dsmfog8npy8ii" path="res://assets/weight.png" id="7_2jqn3"]
+[ext_resource type="Texture2D" uid="uid://ctv0xo8dkh4ak" path="res://assets/square.png" id="7_h3iht"]
+[ext_resource type="Texture2D" uid="uid://cjp8lq3v41br7" path="res://assets/scale.png" id="8_24jh2"]
+[ext_resource type="Texture2D" uid="uid://c6wf1tgq3cx4d" path="res://assets/background.png" id="10_2imxd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxdlc"]
+bg_color = Color(1, 1, 1, 0)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("currentWeight", "weightGoal", "timer", "moneyMade", "currentLevel", "successBanner", "failureBanner", "pauseMenu", "addButton", "subtractButton", "multiplyButton", "divideButton", "squareButton", "weightBlock")]
+script = ExtResource("1_8rhij")
+currentWeight = NodePath("Node2D/Scale/PanelContainer/CurrentWeightLabel")
+weightGoal = NodePath("UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer/WeightGoalNumberLabel")
+timer = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer/TimerLabel")
+moneyMade = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2/MoneyMadeLabel")
+currentLevel = NodePath("UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2/LevelLabel")
+successBanner = NodePath("UICanvasLayer/SuccessBanner")
+failureBanner = NodePath("UICanvasLayer/FailBanner")
+pauseMenu = NodePath("UICanvasLayer/PauseMenu")
+addButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AddButton")
+subtractButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SubtractButton")
+multiplyButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/MultiplyButton")
+divideButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/DivideButton")
+squareButton = NodePath("UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SquareButton")
+weightBlock = NodePath("Node2D/Weight/WeightSprite")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("10_2imxd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -4)
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
+follow_viewport_enabled = true
+
+[node name="ButtonTray" type="PanelContainer" parent="UICanvasLayer"]
+offset_left = -320.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 176.0
+theme = ExtResource("2_jnnoe")
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/ButtonTray"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/ButtonTray/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_jnnoe")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_jnnoe")
+text = "1"
+icon = ExtResource("3_wggun")
+
+[node name="SubtractButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_jnnoe")
+text = "1"
+icon = ExtResource("4_jjrro")
+
+[node name="MultiplyButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_jnnoe")
+text = "2"
+icon = ExtResource("5_xcu5k")
+
+[node name="DivideButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("2_jnnoe")
+text = "2"
+icon = ExtResource("6_qjdau")
+
+[node name="SquareButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+text = "2"
+icon = ExtResource("7_h3iht")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Submit"
+
+[node name="ClearButton" type="Button" parent="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Clear"
+
+[node name="WeightGoal" type="PanelContainer" parent="UICanvasLayer"]
+offset_left = 192.0
+offset_top = -184.0
+offset_right = 322.0
+offset_bottom = -128.0
+theme = ExtResource("2_jnnoe")
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/WeightGoal"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/WeightGoal/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Weight Goal"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="WeightGoalNumberLabel" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "10"
+
+[node name="Label2" type="Label" parent="UICanvasLayer/WeightGoal/CenterContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "lbs"
+
+[node name="Timer" type="PanelContainer" parent="UICanvasLayer"]
+offset_left = -320.0
+offset_top = -184.0
+offset_right = -192.0
+offset_bottom = -130.0
+theme = ExtResource("2_jnnoe")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/Timer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/Timer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Lvl 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyMadeLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "$00"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Timer"
+
+[node name="TimerLabel" type="Label" parent="UICanvasLayer/Timer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "1:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FailBanner" type="PanelContainer" parent="UICanvasLayer"]
+process_mode = 3
+visible = false
+offset_left = -128.0
+offset_top = -136.0
+offset_right = 128.0
+offset_bottom = 34.0
+theme = ExtResource("2_jnnoe")
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/FailBanner"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UICanvasLayer/FailBanner/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UICanvasLayer/FailBanner/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+text = "Failure"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UICanvasLayer/FailBanner/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 10
+text = "Your wizard boss had deducted pay."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NextLevelButton" type="Button" parent="UICanvasLayer/FailBanner/CenterContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Next Box"
+
+[node name="SuccessBanner" type="PanelContainer" parent="UICanvasLayer"]
+process_mode = 3
+visible = false
+offset_left = -128.0
+offset_top = -120.0
+offset_right = 128.0
+offset_bottom = 8.0
+theme = ExtResource("2_jnnoe")
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/SuccessBanner"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UICanvasLayer/SuccessBanner/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UICanvasLayer/SuccessBanner/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+text = "Success!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UICanvasLayer/SuccessBanner/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 10
+text = "Your wizard boss is pleased."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NextLevelButton" type="Button" parent="UICanvasLayer/SuccessBanner/CenterContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 10
+text = "Next Level"
+
+[node name="PauseMenu" type="PanelContainer" parent="UICanvasLayer"]
+process_mode = 3
+visible = false
+offset_left = -320.0
+offset_top = -184.0
+offset_right = 320.0
+offset_bottom = 176.0
+theme = ExtResource("2_jnnoe")
+
+[node name="CenterContainer" type="CenterContainer" parent="UICanvasLayer/PauseMenu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/PauseMenu/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Continue"
+
+[node name="MainMenuButton" type="Button" parent="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Main Menu"
+
+[node name="QuitGameButton" type="Button" parent="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Quit Game"
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Weight" type="Node2D" parent="Node2D"]
+
+[node name="WeightSprite" type="Sprite2D" parent="Node2D/Weight"]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("7_2jqn3")
+offset = Vector2(0, -8)
+
+[node name="Scale" type="Node2D" parent="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Scale"]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("8_24jh2")
+
+[node name="PanelContainer" type="PanelContainer" parent="Node2D/Scale"]
+offset_left = -40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = -9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hxdlc")
+
+[node name="CurrentWeightLabel" type="Label" parent="Node2D/Scale/PanelContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SubtractButton" to="." method="_on_subtract_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/MultiplyButton" to="." method="_on_multiply_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/DivideButton" to="." method="_on_divide_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/SquareButton" to="." method="_on_square_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/ButtonTray/CenterContainer/VBoxContainer/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/FailBanner/CenterContainer/HBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/SuccessBanner/CenterContainer/HBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

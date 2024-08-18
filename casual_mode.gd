@@ -4,9 +4,8 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 @export var currentWeight: Label = null
 @export var weightGoal: Label = null
-@export var timer: Label = null
+
 @export var moneyMade: Label = null
-@export var currentLevel: Label = null
 
 @export var successBanner: Container = null
 @export var failureBanner: Container = null
@@ -16,50 +15,23 @@ extends Node2D
 @export var subtractButton: Button = null
 @export var multiplyButton: Button = null
 @export var divideButton: Button = null
-@export var squareButton: Button = null
 
 @export var weightBlock: Node2D = null
 
 var correctWeight = false
 var rng = RandomNumberGenerator.new()
 static var money = 0
-static var level = 0
-static var maxWeightGoal = 30
-static var minWeightGoal = 10
-static var timerLength = 10
 
 func _ready():
-	level += 1
-	currentLevel.text = 'Lvl ' + str(level)
-	
 	get_tree().paused = false
-	
-	if level % 4 == 0: 
-		maxWeightGoal *= 4
-		minWeightGoal *= 4
-		timerLength += 10
-		
-	
-	if level > 3:
-		multiplyButton.visible = true
-		divideButton.visible = true
-		
-	if level > 6:
-		squareButton.visible = true
-	
-	weightGoal.text = str(rng.randi_range(minWeightGoal, maxWeightGoal))
-	currentWeight.text = str(rng.randi_range(minWeightGoal, maxWeightGoal))
+	weightGoal.text = str(rng.randi_range(0, 200))
+	currentWeight.text = str(rng.randi_range(1, 9))
 	changeSize()
 	moneyMade.text = '$' + str(money)
-	$Timer.wait_time = timerLength
-	$Timer.start()
 	
-func _process(delta):
-	timer.text = str(int($Timer.time_left))
-	
+func _process(delta):	
 	if Input.is_key_pressed(KEY_ESCAPE):
 		pauseMenu.visible = !pauseMenu.visible
-		$Timer.paused = !$Timer.paused
 		get_tree().paused = !get_tree().paused
 
 func _on_add_button_pressed():
@@ -83,9 +55,7 @@ func _on_divide_button_pressed():
 
 func _on_submit_button_pressed():
 	if currentWeight.text == weightGoal.text:
-		$Timer.paused = true
 		successBanner.visible = true
-		money += int($Timer.time_left)
 		get_tree().paused = true
 
 func _on_clear_button_pressed():
@@ -105,16 +75,8 @@ func _on_next_level_button_pressed():
 	get_tree().reload_current_scene()
 
 
-func _on_timer_timeout():
-	$Timer.stop()
-	failureBanner.visible = true
-	get_tree().paused = true
-	if money != 0:
-		money -= int($Timer.time_left)
-
 func _on_continue_button_pressed():
 	pauseMenu.visible = !pauseMenu.visible
-	$Timer.paused = !$Timer.paused
 	get_tree().paused = !get_tree().paused
 
 func _on_main_menu_button_pressed():
@@ -122,8 +84,3 @@ func _on_main_menu_button_pressed():
 
 func _on_quit_game_button_pressed():
 	get_tree().quit()
-
-
-func _on_square_button_pressed():
-	currentWeight.text = str(int(currentWeight.text) * int(currentWeight.text))
-	changeSize()
